@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/swiper.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* html {
+            font-size: 15px;
+        } */
+
+        body {
+            background: rgba(249, 249, 251, 1);
+        }
+
+        li {
+            list-style: none;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        h4 {
+            display: inline-block;
+            width: 70%;
+            margin: 10px 0;
+        }
+
+        /* 底部栏 */
+        .bottom {
+            width: 100%;
+            height: 53px;
+            position: fixed;
+            bottom: 0px;
+            background-color: #fff;
+            z-index: 2000;
+        }
+
+        .bottom>ul>li {
+            float: left;
+            width: 25%;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .bottom .bottom-item-imgs img {
+            /* width: 100%; */
+            height: 25px;
+        }
+
+
+        /* 头部 */
+        .top {
+            background-color: #5BCF84;
+            width: 100%;
+            height: 133px;
+            border-bottom-left-radius: 6%;
+            border-bottom-right-radius: 6%;
+        }
+
+        .top img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 顶部功能栏 */
+        .fun {
+            width: 100px;
+            height: 35px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding-top: 13px;
+            z-index: 1002;
+        }
+
+        .fun .search {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+        }
+
+        /* .fun .search a {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        } */
+        .fun .search img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .fun .fun-service {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            margin-left: 14px;
+        }
+
+        .fun .fun-service img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 内容 */
+        .content {
+            margin: 0 4%;
+        }
+
+        /* 服务类型 */
+        .compre-service {
+            position: relative;
+            top: -10px;
+            width: 100%;
+            height: 116px;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
+            border-radius: 5px;
+            padding: 5px 1%;
+            z-index: 1000;
+        }
+
+        .compre-service>ul {
+            height: 100%;
+        }
+
+        .compre-service>ul>li {
+            float: left;
+            width: 50%;
+            height: 100%;
+            border-right: 1px solid #dad7da;
+        }
+
+        .compre-service>ul>li:last-child {
+            border-right: none;
+        }
+
+        .compre-service .compre-items .compre-imgs {
+            width: 25%;
+            margin: 5px auto;
+            text-align: center;
+        }
+
+        .compre-service .compre-items .compre-imgs img {
+            max-width: 100%;
+            max-height: 50px;
+        }
+
+        /* 服务项目 */
+        .serve-items {
+            margin: 10px 0;
+            width: 100%;
+            height: 65px;
+        }
+
+        .serve-items>ul {
+            height: 100%;
+        }
+
+        .serve-items>ul>li {
+            float: left;
+            width: 25%;
+            height: 100%;
+
+        }
+
+        .serve-items .serve-item-imgs {
+            width: 50%;
+            margin: 5px auto 0;
+            text-align: center;
+        }
+
+        .serve-items .serve-item-imgs img {
+            max-width: 100%;
+            max-height: 32px;
+        }
+
+        .serve-items .serve-item-descri {
+            font-size: 15px;
+            line-height: 18px;
+            color: #172616;
+        }
+
+        /* 最新评价 */
+        .new-evaluate {
+            background-color: #fff;
+            width: 100%;
+            padding: 10px 5px;
+        }
+
+        .new-evaluate .new-evalu-imgs {
+            display: inline-block;
+            width: 18%;
+            padding: 0 2%;
+            vertical-align: top;
+        }
+
+        .new-evaluate .new-evalu-imgs img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .new-evaluate .new-evalu-msg {
+            display: inline-block;
+            width: 78%;
+            padding-left: 3%;
+        }
+
+        .new-evaluate .new-evalu-msg .fname {
+            float: left;
+        }
+
+        .new-evaluate .new-evalu-msg .time {
+            float: right;
+        }
+
+        .new-evaluate .new-evalu-msg .msgs {
+            display: block;
+            position: relative;
+            bottom: -4px;
+            margin-top: 5px;
+            line-height: 18px;
+        }
+
+        /* 名医专区 */
+        .famous-doc {
+            margin: 10px 0;
+        }
+
+        .famous-doc .famous-doc-msgs {
+            width: 100%;
+            height: 100px;
+            background: url("imgs/famous-doc.png") no-repeat center;
+            background-size: 100% 100%;
+            margin: 20px 0;
+        }
+
+        .famous-doc .famous-descri {
+            width: 70%;
+            position: relative;
+            top: 30px;
+            left: 20px;
+            display: inline-block;
+        }
+
+        .famous-doc .famous-go {
+            height: 35px;
+            width: 35px;
+            display: inline-block;
+            position: relative;
+            top: 30px;
+            left: 10px;
+        }
+
+        .famous-doc .famous-go img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 热门服务 */
+        .hot-service {
+            width: 100%;
+        }
+
+        .hot-service .hot-service-more {
+            width: 20%;
+            display: inline-block;
+            float: right;
+        }
+
+        .hot-service>ul {
+            overflow: hidden;
+        }
+
+        .hot-service>ul>li {
+            float: left;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            width: 32.6666%;
+            height: 128px;
+            margin: 4px 1% 3px 0;
+        }
+
+        .hot-service>ul>li .imgs {
+            width: 100%;
+            height: 84px;
+        }
+
+        .hot-service>ul>li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hot-service>ul>li:first-child {
+            position: relative;
+            width: 66.1333%;
+            background-size: 100% 100%;
+            margin: 0;
+        }
+
+        .hot-service>ul>li:first-child .imgs {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hot-service>ul>li:nth-child(2) {
+            margin: 0 0 0 1%;
+        }
+
+        .hot-service>ul>li:last-child {
+            margin-right: 0;
+        }
+
+        .hot-service .hot-service-detail {
+            position: relative;
+            top: 6px;
+            font-size: 10px;
+        }
+
+        .hot-service>ul>li:first-child .hot-service-detail {
+            position: absolute;
+            top: 85px;
+            width: 100%;
+        }
+
+        .hot-service .hot-service-detail p {
+            text-align: left;
+            padding-left: 6px;
+        }
+
+        .hot-service .hot-service-detail .price {
+            color: red;
+        }
+
+        /* 线下诊所 */
+        .offline-clinic {
+            background-color: #fff;
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+        }
+
+        .offline-clinic>ul {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .offline-clinic>ul>li {
+            width: 40%;
+            height: 190px;
+            border: 1px solid red;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .offline-clinic>ul>li .imgs {
+            width: 100%;
+            height: 100px;
+        }
+
+        .offline-clinic>ul>li .imgs img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .offline-clinic>ul>li p {
+            height: 10px;
+        }
+
+        .offline-clinic>ul>li .position {
+            height: 60px;
+        }
+
+        /*  */
+        /********************************************/
+
+        /* 用ui库写轮播图 */
+
+        /*2019.05.09 22:27*/
+        /********************************************/
+        /* 健康咨询 */
+
+
+        .health-consult {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .health-consult>ul>li {
+            width: 96%;
+            height: 116px;
+            margin: 2%;
+        }
+
+        .health-consult>ul>li .consult-descri {
+            display: inline-block;
+            width: 60%;
+            height: 100%;
+            vertical-align: top;
+            position: relative;
+            top: 20px;
+        }
+
+        .health-consult>ul>li .consult-imgs {
+            display: inline-block;
+            width: 34%;
+            height: 80%;
+            position: relative;
+            top: 10px;
+            margin-left: 4%;
+        }
+
+        .health-consult>ul>li .consult-imgs img {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* 尾部撑高 */
+        .footer {
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div id="bottom" class="bottom">
+            <ul>
+                <li v-for="(item, index) in bottomLists" :key="index">
+                    <div class="bottom-item-imgs">
+                        <img :src="item.src" alt="">
+                        <p>{{ item.title }}</p>
+                    </div>
+                </li>
+                <li class="clear"> </li>
+            </ul>
+        </div>
+
+        <!-- 顶部功能 -->
+        <div class="fun">
+            <span class="search">
+                <a href="javascript:void(0)">
+                    <img src="imgs/search.png" alt="">
+                </a>
+            </span>
+            <span class="fun-service">
+                <img src="imgs/fun-service.png" alt="">
+            </span>
+        </div>
+
+
+        <!-- 顶部图片 -->
+        <div class="top swiper-container">
+            <ul class="top-imgs swiper-wrapper">
+                <li class="swiper-slide" v-for="(item, index) in topList" :key="index">
+                    <img :src="item.src" alt="">
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="content">
+
+            <!-- 服务类型 -->
+            <div class="compre-service">
+                <ul>
+                    <li class="nurse compre-items" v-for="(item, index) in compreServices" :key="index">
+                        <div class="compre-imgs">
+                            <img :src="item.src" alt="">
+                        </div>
+                        <p class="compre-title title-font">{{ item.label }}</p>
+                        <p class="descri small-font">{{ item.details }}</p>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
+            <!-- 服务项目 -->
+
+            <div class="serve-items">
+                <ul>
+                    <li v-for="(item, index) in serveItems" :key="index">
+                        <div class="serve-item-imgs">
+                            <img :src="item.src" alt="">
+                        </div>
+                        <p class="serve-item-descri">{{ item.title }}</p>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
+            <div class="new-evaluate">
+                <div class="new-evalu-imgs">
+                    <img src="imgs/new-evaluate.png" alt="111">
+                </div>
+                <div class="new-evalu-msg fontsize10 borderL">
+                    <span class="fname">{{ newEvaluate.name }}</span>
+                    <span class="time">{{ newEvaluate.time }}</span>
+                    <div class="clear"></div>
+                    <div class="msgs small-font">{{ newEvaluate.msgs }}</div>
+                </div>
+            </div>
+
+            <!-- 名医专区 -->
+
+            <div class="famous-doc">
+                <h4> {{ totalItems[0] }} </h4>
+                <div class="famous-doc-msgs">
+                    <div class="famous-descri">
+                        <p>{{ famousDoc.title }}</p>
+                        <p class="small-font">{{ famousDoc.details }}</p>
+                    </div>
+                    <div class="famous-go">
+                        <a href="javascript:void(0)">
+                            <img src="imgs/go.png" alt="">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 热门服务 -->
+
+            <div class="hot-service">
+                <h4> {{ totalItems[1] }} </h4>
+                <a href="javascript:void(0)">
+                    <span class="hot-service-more tRight small-font lineH41">
+                        更多>
+                    </span>
+                </a>
+
+                <div class="clear"></div>
+                <ul>
+                    <li v-for="(item, index) in hotService" :key="index">
+                        <div class="imgs">
+                            <img :src="item.src" alt="">
+                        </div>
+                        <div class="hot-service-detail">
+                            <p class="decri"> {{ item.label }} </p>
+                            <p class="price"> {{ item.price }} </p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
+            <!-- 线下诊所 -->
+
+            <h4> {{ totalItems[2] }} </h4>
+            <div class="swiper-container offline-clinic">
+                <ul class="swiper-wrapper">
+                    <li class="swiper-slide" v-for="(item, index) in offlineClinic" :key="index">
+                        <div class="imgs">
+                            <img :src="item.src" alt="">
+                        </div>
+                        <p class="clinic-name"> {{ item.name }} </p>
+                        <div class="position">
+                            <span class="imgs"></span>
+                            <span class="address"> {{ item.addr }} </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 健康咨询 -->
+
+            <h4> {{ totalItems[3] }} </h4>
+            <div class="health-consult">
+                <ul>
+                    <li>
+                        <div class="consult-descri fontsize12">
+                            <p class="tLeft">什么乱七八糟的峰会我捡到了一串车钥匙还报警了然后就没有然后了~~~~~~~</p>
+                            <div class="date small-font marginT10">2019.05.01</div>
+                        </div>
+                        <div class="consult-imgs">
+                            <img src="imgs/exam.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="news">
+                <div class="news-imgs"></div>
+                <p class="news-title"></p>
+                <span class="news-date">2019年5月1日</span>
+            </div>
+
+            <div class="footer tCenter">~木有了木有了~</div>
+            <div class="">I add a line to test how the git repository worked</div>
+        </div>
+    </div>
+</body>
+
+<script src="js/swiper.js"></script>
+<script>
+    var listener = false;
+
+    var bottomPart = new Vue({
+        el: '#app',
+        data: {
+            totalItems: [
+                "名医专区",
+                "热门服务",
+                "线下诊所",
+                "健康咨询"
+            ],
+            newEvaluate: { name: "陈xx", time: "2019-4-16 19：00:03", msgs: "柯宝在码代码码代码码了一晚上然后没有然后了困了回家睡觉觉了嗷呜喵呜呜奥呜呜呜哈哈哈啦啦啦啦" },
+            famousDoc: { title: "北京名医线上会诊", details: "预约、陪诊、专车接送一站式服务" },
+            bottomLists: [
+                { title: "首页", src: "imgs/exam.png" },
+                { title: "首页", src: "imgs/exam.png" },
+                { title: "首页", src: "imgs/exam.png" },
+                { title: "首页", src: "imgs/exam.png" }
+            ],
+            topList: [
+                { src: "imgs/hot1.png" },
+                { src: "imgs/hot2.png" },
+                { src: "imgs/hot3.png" }
+
+            ],
+            compreServices: [
+                { src: "imgs/exam.png", label: "护士上门", details: "护士上门服务，省心更安心" },
+                { src: "imgs/exam.png", label: "医生咨询", details: "医生线上问诊，省心更安心" }
+            ],
+            serveItems: [
+                { src: "imgs/exam.png", title: "健康体检" },
+                { src: "imgs/exam.png", title: "挂号陪诊" },
+                { src: "imgs/exam.png", title: "私人定制" },
+                { src: "imgs/exam.png", title: "PET-CT" }
+            ],
+            hotService: [
+                { label: "普通换药", price: "￥9999", src: "imgs/hot5.png" },
+                { label: "普通换药", price: "￥9999", src: "imgs/hot1.png" },
+                { label: "普通换药", price: "￥9999", src: "imgs/hot2.png" },
+                { label: "普通换药", price: "￥9999", src: "imgs/hot3.png" },
+                { label: "普通换药", price: "￥9999", src: "imgs/hot4.png" }
+            ],
+            offlineClinic: [
+                { src: "imgs/hot3.png", name: "xxx诊所", addr: "莆田市荔城区" },
+                { src: "imgs/hot2.png", name: "xxx诊所", addr: "莆田市荔城区" },
+                { src: "imgs/hot1.png", name: "xxx诊所", addr: "莆田市荔城区" }
+            ]
+
+
+        },
+        created () {
+            listener = true;
+        }
+
+    })
+
+
+    function xxx() {
+        var topSwiper = new Swiper('.top', {
+            autoplay: true, //自动轮播//等同于以下设置
+            // /*autoplay: {
+            //     delay: 3000,
+            //     stopOnLastSlide: false,
+            //     disableOnInteraction: true,
+            //     },*/
+            loop: true, //循环模式
+            pagination: {
+                el: '.swiper-pagination',
+            }
+        });
+        var clinicSwiper = new Swiper('.offline-clinic', {
+            autoplay: true,
+            loop: true,
+        })
+    }
+
+    var timer = setInterval(function() {
+        if(listener) {
+            xxx();
+            clearInterval(timer);
+        }
+    }, 100)
+</script>
+
+</html>
