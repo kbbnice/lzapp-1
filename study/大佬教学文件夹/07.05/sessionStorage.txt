@@ -1,0 +1,3 @@
+sessionStorage.setItem("age", 12)  // 设置数据
+sessionStorage.getItem('name') // 获取数据
+sessionStorage.clear() // 删除数据
