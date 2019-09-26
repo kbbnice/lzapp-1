@@ -33,3 +33,43 @@ git remote add origin git@github.com:kbbnice/zkyweb-ptyc.git
 fatal: remote origin already exists.
 ```
 
+
+
+
+
+#####  版本回退出现more问题
+
+λ git reset --hard HEAD^
+More?
+
+这是因为cmd控制台中换行符默认是^，而不是\ ，所以它的more？的意思是问你下一行是否需要再输入，而^ 符号就被当做换行符而被git命令忽略掉了。
+
+解决方法有如下几种：
+
+```
+git reset --hard "HEAD^"   //加引号
+git reset --hard HEAD^^  //加一个^
+git reset --hard HEAD~ 或者 git reset --hard HEAD~1  //把^换成~，~ 后面的数字表示回退几次提交，默认是一次
+```
+
+
+
+#### 版本回退命令： 
+
+`git reset --hard HEAD~2 `  或者 `git reset --hard HEAD^^`代表回退上上个版本
+
+`git reset --hard es13223` 用版本号回退（可以不把所有版本号打上只需要从头取几个就够了)
+
+
+
+`git log --pretty=oneline`  把git log 每项一行展示
+
+
+
+##### 版本回退后无法提交的问题：
+
+1. git revert '版本号'
+2. git push
+
+
+
